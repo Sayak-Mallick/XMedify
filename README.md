@@ -1,43 +1,71 @@
-# MEDIFY - Medical Center Slot Booking Platform
+# Medify
 
-![Screenshot of App](./src/assets/Screenshot1.png)
+Medify is a modern healthcare web application designed to connect patients with medical centers, hospitals, and doctors. It provides a seamless experience for users to search for healthcare facilities, book appointments, and access medical services online.
 
-## The App
+## Features
 
-**Crio Code-A-Thon Project:** React-based web application that allows users to find medical centers in a specific state and city across the USA and book appointments.
+- **Search Functionality**: Users can search for hospitals, doctors, and laboratories by state, city, or name.
+- **Appointment Booking**: Book appointments with minimal wait times and verified doctor details.
+- **Specialization Finder**: Explore medical centers by specialization such as cardiology, dentistry, and more.
+- **Responsive Design**: Fully responsive UI for a seamless experience across devices.
+- **User-Friendly Navigation**: Intuitive navigation with a clean and modern interface.
+- **Context Management**: State management using React Context API for bookings and search results.
+- **Integration with APIs**: Fetch real-time data for cities and hospitals using external APIs.
 
+## Installation
 
-## Features:
-- **Landing Page:**
-    - App has top navigation bar with access to platform sections such as Find Doctors, Hospitals, Medicines, and more.
-    - App hasa  search section for users to select a state and city, leading to a list of available medical centers in the chosen area.
-    - Both State and City has a dropdown where the options are fetched from an api.
-- **Search Results Page:**
-    - Search result pages has a listings view showing available medical centers in the selected location with the option to book appointments.
-- **Booking Interface:**
-    - App has a detailed booking section for users to select a medical center, with a calendar-like interface to choose an appointment date.
-    - Booking Interface has the ability to book an appointment within a time frame from today up to one week in advance.
-    - Booking Interface has a selection of available time slots for the selected day.
-- **My Bookings Page:**
-    - My Bookings Page is a personalized page that displays all user bookings, including details such as the medical center's name, appointment date, and time.
-- **Responsive Design:**
-    - The application is fully responsive to various screen widths.
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd Medify
+   ```
 
+## Project Structure
 
-## Tech Used
+Scripts
+npm run dev: Start the development server.
+npm run build: Build the project for production.
+npm run preview: Preview the production build.
+npm run lint: Run ESLint to check for code quality.
+Technologies Used
+Frontend: React, React Router, Material-UI, Swiper.js
+Styling: CSS Modules, Responsive Design
+Build Tool: Vite
+State Management: React Context API
+API Integration: Axios
+Components Overview
+Key Components
+Navbar: Navigation bar with links to different sections.
+SearchBar: Allows users to search for hospitals and doctors.
+ResultCard: Displays search results for hospitals and doctors.
+Slots: Displays available appointment slots for booking.
+Specialization: Displays medical specializations with icons.
+PatientCaring: Highlights patient care features.
+FAQ: Frequently Asked Questions section.
+MainFooter: Footer with links and social media icons.
+Contexts
+BookingsContext: Manages user bookings.
+FoundHospitalsContext: Manages search results for hospitals.
+API Endpoints
+Cities API: Fetches cities for a given state.
+Hospitals API: Fetches hospitals based on state and city.
+Deployment
+To deploy the application, build the project using:
 
-`HTML`
-`CSS`
-`REACT JS`
-`REACT ROUTER DOM`
+The production-ready files will be available in the dist folder. You can deploy these files to any static hosting service like Netlify, Vercel, or AWS S3.
 
-## NPM library used to
+Contributing
+Contributions are welcome! Please follow these steps:
 
-`SWIPER`
-`MATERIAL UI`
-`Axios`
+Fork the repository.
+Create a new branch for your feature or bug fix.
+Commit your changes and push them to your fork.
+Submit a pull request.
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
 
+Contact
+For any inquiries or support, please contact:
 
-- <a href="https://medify-azure.vercel.app/" target="_blank">Click here for demo</a>
-
-**Had fun building!** 🚀
+Email: support@medify.com
+Website: Medify
