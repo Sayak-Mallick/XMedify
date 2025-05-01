@@ -12,14 +12,6 @@ Medify is a modern healthcare web application designed to connect patients with 
 - **Context Management**: State management using React Context API for bookings and search results.
 - **Integration with APIs**: Fetch real-time data for cities and hospitals using external APIs.
 
-## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd Medify
-   ```
-
 ## Project Structure
 
 Scripts
