@@ -98,7 +98,7 @@ const Navbar = props => {
                 </div>
                 <div className='navBody'>
                     <div className='navLinksDiv'>{displayLinks()}</div>
-                    <Link to="/bookings">
+                    <Link to="/my-bookings">
                         <Button text="my bookings" buttonClass="largeButton "/>
                     </Link>
                 </div>

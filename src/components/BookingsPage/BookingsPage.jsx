@@ -9,8 +9,10 @@ const BookingsPage = () => {
         <>
             <AppTop />  
             <Navbar atBookingsPage={true} backColor="whiteBack" />
-            
-            <Bookings />
+            <div className="bookings-container">
+                <h1>My Bookings</h1>
+                <Bookings />
+            </div>
         </>
     );
 };
