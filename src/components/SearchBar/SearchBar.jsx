@@ -37,12 +37,12 @@ const SearchBar = props => {
     const stateName_onChange = useRef(false);
     const cityName_onChange = useRef(false);
     const fetchingCities = useRef(false);
-    //side effects
-    useEffect(()=> {
+
+    useEffect(() => {
         if(stateName_onChange.current) filterStatesFunc();
     }, [stateName])
 
-    useEffect(()=> {
+    useEffect(() => {
         if(cityName_onChange.current) filterCitiesFunc();
     }, [cityName])
 
@@ -50,14 +50,10 @@ const SearchBar = props => {
         filterBookingsFunc();
     }, [hospitalName])
 
-    //functions
     const handleSubmit = async event => {
         event.preventDefault();
-        
-        // if(atBookingsPage) return filterBookingsFunc();
-
+        if(atBookingsPage) return filterBookingsFunc();
         getLocationData("hospitals")
-        
     }
 
     const getLocationData = async (dataType, location) => {
@@ -75,6 +71,7 @@ const SearchBar = props => {
             setFetchingHospitals(false);
         }
     }
+
     const handleChange = event => {
         const {value, name} = event.target;
         
@@ -95,87 +92,83 @@ const SearchBar = props => {
             setHospitalName(value);
         }
     }
+
     const filterStatesFunc = () => {
-        
         let foundStates = findLocations(allSates, stateName);
         setFilteredStates(foundStates);
     }
 
     const filterCitiesFunc = () => {
-        
         let foundCities = findLocations(allCities, cityName);
         setFilteredCities(foundCities);
     }
 
     const filterBookingsFunc = () => {
-        
         let hospitals = findBookings(bookings, hospitalName);
-        // console.log(hospitals);
         setFilteredHospitals(hospitals);
     }
 
     const clickStateSuggestions = (nameOfState) => {
         setFilteredStates([]);
         stateName_onChange.current = false;
-        
         setStateName(nameOfState)
-
         getLocationData("cities", nameOfState);
     }
+
     const clickCitySuggetions = (nameOfCity) => {
         setFilteredCities([]);
         cityName_onChange.current = false;
-        
         setCityName(nameOfCity)
     }
 
     const displayInputs = () => {
         if(atBookingsPage){
             return (
-            <span className='inputWrapper'>
-                <img src={location}/>
-                <input 
-                type='text' 
-                value={hospitalName} 
-                name='hospitalName' 
-                onChange={handleChange}
-                placeholder='Search By Hospital'
-                id='hospitalName'
-                required
-                />
-                <SearchPop atBookingsPage={true} hospitals={filteredHospitals} clickFunction={clickStateSuggestions}/>
-            </span>
-        )
-    }
+                <div className='inputWrapper'>
+                    <img src={location} alt="location icon"/>
+                    <input 
+                        type='text' 
+                        value={hospitalName} 
+                        name='hospitalName' 
+                        onChange={handleChange}
+                        placeholder='Search By Hospital'
+                        id='hospitalName'
+                        required
+                    />
+                    <SearchPop atBookingsPage={true} hospitals={filteredHospitals} clickFunction={clickStateSuggestions}/>
+                </div>
+            )
+        }
         return( 
             <>
-            <span className='inputWrapper'>
-                <img src={location}/>
-                <input 
-                type='text' 
-                value={stateName} 
-                name='state' 
-                onChange={handleChange}
-                placeholder='state'
-                id='state'
-                required
-                />
-                <SearchPop locations={filteredStates} clickFunction={clickStateSuggestions}/>
-            </span>
-            
-            <span className={`inputWrapper ${disableCityInput}`}>
-                <img src={fetchingCities.current ? loadingIcon : location} className={fetchingCities.current ? 'rotateLoad' : null}/>
-                <input 
-                type='text' 
-                value={cityName} 
-                name='city' 
-                onChange={handleChange}
-                placeholder={fetchingCities.current ? "Fetching cities..." :'city'}
-                required
-                disabled={displayInputs ? false : true}
-                />
-                <SearchPop locations={filteredCities} clickFunction={clickCitySuggetions}/>
-            </span>
+                <div id="state" className='inputWrapper'>
+                    <img src={location} alt="location icon"/>
+                    <input 
+                        type='text' 
+                        value={stateName} 
+                        name='state' 
+                        onChange={handleChange}
+                        placeholder='Select State'
+                        required
+                    />
+                    <SearchPop locations={filteredStates} clickFunction={clickStateSuggestions}/>
+                </div>
+                
+                <div id="city" className={`inputWrapper ${disableCityInput}`}>
+                    <img src={fetchingCities.current ? loadingIcon : location} 
+                         className={fetchingCities.current ? 'rotateLoad' : null} 
+                         alt="location icon"/>
+                    <input 
+                        type='text' 
+                        value={cityName} 
+                        name='city' 
+                        onChange={handleChange}
+                        placeholder={fetchingCities.current ? "Fetching cities..." :'Select City'}
+                        required
+                        disabled={disableCityInput ? true : false}
+                    />
+                    <SearchPop locations={filteredCities} clickFunction={clickCitySuggetions}/>
+                </div>
             </>
         )
     }
@@ -184,13 +177,24 @@ const SearchBar = props => {
         <form onSubmit={handleSubmit} className={`SearchBar ${customClass}`}>
             {displayInputs()}
 
-            <Button 
-            formSubmit="true" 
-            text={fetchingHospitals ? "Fetching..." : "search" }
-            icon={fetchingHospitals ? loadingIcon : searchIcon} 
-            buttonClass={"longButton"}
-            rotateIcon={fetchingHospitals ? true : false}
-            />
+            <button 
+                id="searchBtn"
+                type="submit"
+                className="longButton"
+                disabled={fetchingHospitals}
+            >
+                {fetchingHospitals ? (
+                    <>
+                        <img src={loadingIcon} className="rotateLoad" alt="loading"/>
+                        Fetching...
+                    </>
+                ) : (
+                    <>
+                        <img src={searchIcon} alt="search"/>
+                        Search
+                    </>
+                )}
+            </button>
         </form>
     );
 };
