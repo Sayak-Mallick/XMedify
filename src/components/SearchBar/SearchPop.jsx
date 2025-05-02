@@ -29,12 +29,16 @@ const SearchPop = props => {
 
         if(!locations || !locations?.length) return null;
 
-        return locations.map(item => <span onClick={() =>  clickFunction(item)} className='SearchPopItem'>{item}</span>)
+        return locations.map(item => (
+            <li onClick={() => clickFunction(item)} className='SearchPopItem'>
+                {item}
+            </li>
+        ))
     }
     return (
-        <span className='SearchPop'>
+        <ul className='SearchPop'>
             {displayStates()}    
-        </span>
+        </ul>
     );
 };
 
