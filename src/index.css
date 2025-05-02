@@ -3674,5 +3674,5 @@ button:focus-visible {
 
 .slots button.selected {
   background-color: #646cff;
-  color
+  color :rgba(255, 255, 255, 0.87)
 }
