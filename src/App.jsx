@@ -1,44 +1,26 @@
-import { useEffect, useState } from 'react'
-import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-//components
-import Download from './components/Download/Download'
-import MainFooter from './components/MainFooter/MainFooter'
-import HomePage from './components/HomePage/HomePage'
-import FindPage from './components/FindPage/FindPage'
-import BookingsPage from './components/BookingsPage/BookingsPage'
-//contexts
-import { BookingsContext, FoundHospitalsContext } from './contexts/AllContexts';
-
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { useState } from 'react'
+import Home from './pages/Home'
+import SearchResults from './pages/SearchResults'
+import MyBookings from './pages/MyBookings'
+import './App.css'
 
 function App() {
-  const [bookings, setBookings] = useState([]);
-  const [foundHospitals, setFoundHospitals] = useState({
-    hospitals: [],
-    cityName: "",
-    stateName: "",
-    noSearchYet: true
-  });
-  
   return (
-    <>
-      <div className='App'>
-        <BookingsContext.Provider value={[bookings, setBookings]}>
-          <FoundHospitalsContext.Provider value={[foundHospitals, setFoundHospitals]}>
-            <BrowserRouter>
-              <Routes>
-                <Route path='/' exact element={<HomePage />} />
-                <Route path='/home' exact element={<HomePage />} />
-                <Route path='/find' exact element={<FindPage />} />
-                <Route path='/my-bookings' exact element={<BookingsPage />} />
-              </Routes>
-            </BrowserRouter>
-          </FoundHospitalsContext.Provider>
-        </BookingsContext.Provider>
-        <Download />
-        <MainFooter />
+    <Router>
+      <div className="app">
+        <nav className="top-nav">
+          <Link to="/">Home</Link>
+          <Link to="/my-bookings">My Bookings</Link>
+        </nav>
+        
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/search" element={<SearchResults />} />
+          <Route path="/my-bookings" element={<MyBookings />} />
+        </Routes>
       </div>
-    </>
+    </Router>
   )
 }
 
