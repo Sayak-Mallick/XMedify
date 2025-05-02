@@ -33,15 +33,10 @@ export const findSubString = (mainStr, subStr) => {
 
   if(subStr.length > mainStr.length) return null;
 
-  let p=0;
-
-  while(p < subStr.length){
-    if(mainStr[p].toLowerCase() != subStr[p].toLowerCase()) return null;
-    p++;
-  }
-
-  return mainStr;
-  // "abcd" "bc"
+  mainStr = mainStr.toLowerCase();
+  subStr = subStr.toLowerCase();
+  
+  return mainStr.includes(subStr) ? mainStr : null;
 }
 
 
