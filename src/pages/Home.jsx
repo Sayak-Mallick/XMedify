@@ -47,31 +47,34 @@ function Home() {
       <h1>Find Medical Centers</h1>
       <form onSubmit={handleSearch}>
         <div id="state">
-          <select 
-            value={selectedState}
-            onChange={(e) => setSelectedState(e.target.value)}
-          >
-            <option value="">Select State</option>
+          <ul>
             {states.map((state) => (
-              <option key={state} value={state}>{state}</option>
+              <li 
+                key={state}
+                onClick={() => setSelectedState(state)}
+                className={selectedState === state ? 'selected' : ''}
+              >
+                {state}
+              </li>
             ))}
-          </select>
+          </ul>
         </div>
 
         <div id="city">
-          <select
-            value={selectedCity}
-            onChange={(e) => setSelectedCity(e.target.value)}
-            disabled={!selectedState}
-          >
-            <option value="">Select City</option>
+          <ul>
             {cities.map((city) => (
-              <option key={city} value={city}>{city}</option>
+              <li
+                key={city}
+                onClick={() => setSelectedCity(city)}
+                className={selectedCity === city ? 'selected' : ''}
+              >
+                {city}
+              </li>
             ))}
-          </select>
+          </ul>
         </div>
 
-        <button type="submit" id="searchBtn">Search</button>
+        <button type="submit" id="searchBtn" disabled={!selectedState || !selectedCity}>Search</button>
       </form>
     </div>
   )
