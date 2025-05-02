@@ -6,12 +6,6 @@ function BookingModal({ hospital, onClose }) {
   const [selectedTime, setSelectedTime] = useState('')
   const navigate = useNavigate()
 
-  const timeSlots = {
-    Morning: ['9:00 AM', '10:00 AM', '11:00 AM'],
-    Afternoon: ['1:00 PM', '2:00 PM', '3:00 PM'],
-    Evening: ['5:00 PM', '6:00 PM', '7:00 PM']
-  }
-
   const handleBooking = () => {
     if (!selectedDate || !selectedTime) return
 
@@ -23,16 +17,23 @@ function BookingModal({ hospital, onClose }) {
       time: selectedTime
     }
 
-    const existingBookings = JSON.parse(localStorage.getItem('bookings') || '[]')
-    localStorage.setItem('bookings', JSON.stringify([...existingBookings, booking]))
-    
-    navigate('/my-bookings')
+    try {
+      // Get existing bookings
+      const existingBookings = JSON.parse(localStorage.getItem('bookings') || '[]')
+      // Add new booking
+      const updatedBookings = [...existingBookings, booking]
+      // Save to localStorage
+      localStorage.setItem('bookings', JSON.stringify(updatedBookings))
+      // Navigate to bookings page
+      navigate('/my-bookings')
+    } catch (error) {
+      console.error('Error saving booking:', error)
+    }
   }
 
   return (
     <div className="booking-modal">
       <h3>{hospital['Hospital Name']}</h3>
-      
       <div className="date-selection">
         <p>Today</p>
         <input 
@@ -45,26 +46,31 @@ function BookingModal({ hospital, onClose }) {
       </div>
 
       <div className="time-slots">
-        {Object.entries(timeSlots).map(([period, slots]) => (
-          <div key={period} className="time-period">
-            <p>{period}</p>
-            <div className="slots">
-              {slots.map(time => (
-                <button
-                  key={time}
-                  onClick={() => setSelectedTime(time)}
-                  className={selectedTime === time ? 'selected' : ''}
-                >
-                  {time}
-                </button>
-              ))}
-            </div>
-          </div>
-        ))}
+        <p>Morning</p>
+        <div className="slots">
+          <button onClick={() => setSelectedTime('9:00 AM')} className={selectedTime === '9:00 AM' ? 'selected' : ''}>9:00 AM</button>
+          <button onClick={() => setSelectedTime('10:00 AM')} className={selectedTime === '10:00 AM' ? 'selected' : ''}>10:00 AM</button>
+          <button onClick={() => setSelectedTime('11:00 AM')} className={selectedTime === '11:00 AM' ? 'selected' : ''}>11:00 AM</button>
+        </div>
+        
+        <p>Afternoon</p>
+        <div className="slots">
+          <button onClick={() => setSelectedTime('2:00 PM')} className={selectedTime === '2:00 PM' ? 'selected' : ''}>2:00 PM</button>
+          <button onClick={() => setSelectedTime('3:00 PM')} className={selectedTime === '3:00 PM' ? 'selected' : ''}>3:00 PM</button>
+          <button onClick={() => setSelectedTime('4:00 PM')} className={selectedTime === '4:00 PM' ? 'selected' : ''}>4:00 PM</button>
+        </div>
+
+        <p>Evening</p>
+        <div className="slots">
+          <button onClick={() => setSelectedTime('6:00 PM')} className={selectedTime === '6:00 PM' ? 'selected' : ''}>6:00 PM</button>
+          <button onClick={() => setSelectedTime('7:00 PM')} className={selectedTime === '7:00 PM' ? 'selected' : ''}>7:00 PM</button>
+          <button onClick={() => setSelectedTime('8:00 PM')} className={selectedTime === '8:00 PM' ? 'selected' : ''}>8:00 PM</button>
+        </div>
       </div>
 
       <button 
         onClick={handleBooking}
+        className="book-btn"
         disabled={!selectedDate || !selectedTime}
       >
         Book FREE Center Visit
