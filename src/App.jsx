@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import { useState } from 'react'
 import Home from './pages/Home'
 import SearchResults from './pages/SearchResults'
 import MyBookings from './pages/MyBookings'

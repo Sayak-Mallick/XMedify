@@ -4,9 +4,15 @@ function MyBookings() {
   const [bookings, setBookings] = useState([])
 
   useEffect(() => {
-    const storedBookings = localStorage.getItem('bookings')
-    if (storedBookings) {
-      setBookings(JSON.parse(storedBookings))
+    try {
+      const storedBookings = localStorage.getItem('bookings')
+      if (storedBookings) {
+        const parsedBookings = JSON.parse(storedBookings)
+        setBookings(parsedBookings)
+      }
+    } catch (error) {
+      console.error('Error loading bookings:', error)
+      setBookings([])
     }
   }, [])
 
