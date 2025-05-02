@@ -30,7 +30,12 @@ const SearchPop = props => {
         if(!locations || !locations?.length) return null;
 
         return locations.map(item => (
-            <li onClick={() => clickFunction(item)} className='SearchPopItem'>
+            <li 
+                key={item}
+                onClick={() => clickFunction(item)} 
+                className='SearchPopItem'
+                data-testid="dropdown-item"
+            >
                 {item}
             </li>
         ))

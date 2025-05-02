@@ -150,6 +150,7 @@ const SearchBar = props => {
                         onChange={handleChange}
                         placeholder='Select State'
                         required
+                        data-testid="state-input"
                     />
                     <SearchPop locations={filteredStates} clickFunction={clickStateSuggestions}/>
                 </div>
@@ -166,6 +167,7 @@ const SearchBar = props => {
                         placeholder={fetchingCities.current ? "Fetching cities..." :'Select City'}
                         required
                         disabled={disableCityInput ? true : false}
+                        data-testid="city-input"
                     />
                     <SearchPop locations={filteredCities} clickFunction={clickCitySuggetions}/>
                 </div>
